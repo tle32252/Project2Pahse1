@@ -7,12 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 //
-//import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.List;
-//import java.util.concurrent.ConcurrentHashMap;
-//import java.util.concurrent.atomic.AtomicInteger;
-//import java.util.stream.Collectors;
+
 
 
 
@@ -21,8 +16,6 @@ public class DataModel {
         private String parcelId;
         private String stationId;
         private long timeStamp;
-//        public long count ;
-
 
 
         ParcelObserved(String parcelId_, String stationId_, long ts_) {
@@ -55,28 +48,6 @@ public class DataModel {
 
         ParcelObserved parcelObserved = new ParcelObserved(parcelId, stationId, timestamp);
 
-
-//        if(!ps.containsKey(parcelId)){
-//            ConcurrentSkipListSet<ParcelObserved> a = new ConcurrentSkipListSet<>();
-//            a.add(parcelObserved);
-////            System.out.println(a);
-//            ps.put(parcelId, a);
-//        }
-//        else {
-//            ps.get(parcelId).add(parcelObserved);
-//        }
-//
-//
-//
-//        if (sp.containsKey(stationId) == false){
-//            sp.put(stationId,1L);
-//        }
-//        else {
-//            long count = sp.get(stationId); //value
-//            count += 1;
-//            sp.put(stationId, count);
-//        }
-
         if (!ps.containsKey(parcelId)){
             List<ParcelObserved> a = new ArrayList<>();
             a.add(parcelObserved);
@@ -88,7 +59,6 @@ public class DataModel {
 
         }
 
-//        sp.put(stationId, count += 1);
 
         if (sp.containsKey(stationId)){
             long count = sp.get(stationId);
@@ -100,30 +70,28 @@ public class DataModel {
         }
 
 
-//        transactions.add(parcelObserved);
     }
 
     public List<ParcelObserved> getParcelTrail(String parcelId) {
-//        return null;
         if (ps.containsKey(parcelId)) {
-//            System.out.println(ps.get(parcelId));
             return new ArrayList<>(ps.get(parcelId));
-//            return ps.get(parcelId).stream()
-//                    .collect(Collectors.toList());
+
         } else{
-            return null;
+            return new ArrayList<>();
 
         }
-//        return ps.get(parcelId).stream()
-////                .filter(observeEvent -> observeEvent.parcelId.equals(parcelId))
-//                .collect(Collectors.toList());
+
     }
 
     public long getStopCount(String stationId) {
 
+
+
+        if (!sp.containsKey(stationId)){
+            return 0L;
+        }
         return sp.get(stationId);
-//                .filter(observeEvent -> observeEvent.stationId.equals(stationId))
-//                .count();
+
     }
 }
 
