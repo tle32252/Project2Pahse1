@@ -19,18 +19,9 @@ import java.util.stream.Collectors;
 public class DataModel {
     public static class ParcelObserved {
         private String parcelId;
-
-        @Override
-        public String toString() {
-            return "ParcelObserved{" +
-                    "parcelId='" + parcelId + '\'' +
-                    ", stationId='" + stationId + '\'' +
-                    ", timeStamp=" + timeStamp +
-                    '}';
-        }
-
         private String stationId;
         private long timeStamp;
+//        public long count ;
 
 
 
@@ -115,7 +106,7 @@ public class DataModel {
     public List<ParcelObserved> getParcelTrail(String parcelId) {
 //        return null;
         if (ps.containsKey(parcelId)) {
-            System.out.println(ps.get(parcelId));
+//            System.out.println(ps.get(parcelId));
             return new ArrayList<>(ps.get(parcelId));
 //            return ps.get(parcelId).stream()
 //                    .collect(Collectors.toList());
@@ -133,14 +124,6 @@ public class DataModel {
         return sp.get(stationId);
 //                .filter(observeEvent -> observeEvent.stationId.equals(stationId))
 //                .count();
-    }
-
-    public static void main(String[] args) {
-        DataModel a = new DataModel();
-        a.postObserve("1", "2", 333L);
-        a.postObserve("1", "3", 8575L);
-        System.out.println(a.getParcelTrail("1"));
-
     }
 }
 
