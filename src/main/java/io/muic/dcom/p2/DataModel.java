@@ -19,9 +19,18 @@ import java.util.stream.Collectors;
 public class DataModel {
     public static class ParcelObserved {
         private String parcelId;
+
+        @Override
+        public String toString() {
+            return "ParcelObserved{" +
+                    "parcelId='" + parcelId + '\'' +
+                    ", stationId='" + stationId + '\'' +
+                    ", timeStamp=" + timeStamp +
+                    '}';
+        }
+
         private String stationId;
         private long timeStamp;
-        public long count ;
 
 
 
@@ -88,15 +97,16 @@ public class DataModel {
 
         }
 
-        sp.put(stationId, count += 1);
+//        sp.put(stationId, count += 1);
 
-//        if (sp.containsKey(stationId)){
-//            long count = sp.get(stationId);
-//
-//            sp.put(stationId, count);
-//        } else {
-//            sp.put(stationId, 1L);
-//        }
+        if (sp.containsKey(stationId)){
+            long count = sp.get(stationId);
+            count += 1L;
+
+            sp.put(stationId, count);
+        } else {
+            sp.put(stationId, 1L);
+        }
 
 
 //        transactions.add(parcelObserved);
@@ -105,8 +115,10 @@ public class DataModel {
     public List<ParcelObserved> getParcelTrail(String parcelId) {
 //        return null;
         if (ps.containsKey(parcelId)) {
-            return ps.get(parcelId).stream()
-                    .collect(Collectors.toList());
+            System.out.println(ps.get(parcelId));
+            return new ArrayList<>(ps.get(parcelId));
+//            return ps.get(parcelId).stream()
+//                    .collect(Collectors.toList());
         } else{
             return null;
 
@@ -122,17 +134,21 @@ public class DataModel {
 //                .filter(observeEvent -> observeEvent.stationId.equals(stationId))
 //                .count();
     }
+
+    public static void main(String[] args) {
+        DataModel a = new DataModel();
+        a.postObserve("1", "2", 333L);
+        a.postObserve("1", "3", 8575L);
+        System.out.println(a.getParcelTrail("1"));
+
+    }
 }
 
 
 
 
 
-
-
-
-
-
+///////////////////////////////////////////////////////////////////
 
 
 
